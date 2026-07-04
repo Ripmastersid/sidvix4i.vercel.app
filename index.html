@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidvix4I - AI Video Generator | Create Ultra Realistic Videos</title>
+    <meta name="description" content="Sidvix4I: Create ultra realistic videos with AI. Cartoon creator, automated voices, 4K quality - all free. Transform your ideas into stunning videos in seconds.">
+    <meta name="keywords" content="AI video generator, video creation, realistic videos, cartoon maker, AI voices, 4K video, Sidvix4I, Sidivix AI">
+    
+    <!-- Favicon - Substitua pelo seu arquivo de logo -->
+    <link rel="icon" type="image/png" href="./logo-sidvix4i-red.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: { 50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e' },
+                        accent: { 50: '#fdf4ff', 100: '#fae8ff', 200: '#f5d0fe', 300: '#f0abfc', 400: '#e879f9', 500: '#d946ef', 600: '#c026d3', 700: '#a21caf', 800: '#86198f', 900: '#701a75' },
+                        dark: { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { scrollbar-width: thin; scrollbar-color: #334155 #0f172a; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); } 50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6); } }
+        @keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes slide-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes progress { from { width: 0%; } to { width: 100%; } }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes bounce-subtle { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        .animate-gradient { background-size: 200% 200%; animation: gradient-shift 3s ease infinite; }
+        .animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
+        .animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
+        .animate-spin-slow { animation: spin-slow 3s linear infinite; }
+        .animate-bounce-subtle { animation: bounce-subtle 2s ease-in-out infinite; }
+        
+        .gradient-text { background: linear-gradient(135deg, #0ea5e9, #d946ef, #0ea5e9); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradient-shift 3s ease infinite; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-light { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        .btn-primary { background: linear-gradient(135deg, #0ea5e9, #d946ef); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4); }
+        
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); border-color: rgba(14, 165, 233, 0.5); }
+        
+        .input-field { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(100, 116, 139, 0.3); transition: all 0.3s ease; }
+        .input-field:focus { border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2); outline: none; }
+        
+        .progress-bar { background: linear-gradient(90deg, #0ea5e9, #d946ef, #0ea5e9); background-size: 200% 100%; animation: shimmer 2s linear infinite; }
+        
+        .video-preview { background: linear-gradient(135deg, #1e293b, #0f172a); position: relative; overflow: hidden; }
+        .video-preview::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(14, 165, 233, 0.1) 50%, transparent 70%); animation: shimmer 3s linear infinite; background-size: 200% 100%; }
+        
+        .toggle-switch { position: relative; width: 50px; height: 26px; background: #334155; border-radius: 13px; cursor: pointer; transition: all 0.3s ease; }
+        .toggle-switch.active { background: linear-gradient(135deg, #0ea5e9, #d946ef); }
+        .toggle-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: all 0.3s ease; }
+        .toggle-switch.active::after { left: 27px; }
+        
+        .page { display: none; }
+        .page.active { display: block; animation: fade-in 0.4s ease-out; }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); z-index: 100; display: none; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; animation: fade-in 0.3s ease-out; }
+        
+        .notification { position: fixed; top: 20px; right: 20px; z-index: 200; animation: slide-up 0.4s ease-out; }
+        
+        .feature-card { background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(217, 70, 239, 0.1)); border: 1px solid rgba(14, 165, 233, 0.2); }
+        
+        .voice-card { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(100, 116, 139, 0.2); transition: all 0.3s ease; cursor: pointer; }
+        .voice-card:hover, .voice-card.selected { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.1); }
+        
+        .quality-option { background: rgba(30, 41, 59, 0.6); border: 2px solid rgba(100, 116, 139, 0.2); transition: all 0.3s ease; cursor: pointer; }
+        .quality-option:hover, .quality-option.selected { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.1); }
+        
+        .sidebar-item { transition: all 0.2s ease; border-left: 3px solid transparent; }
+        .sidebar-item:hover, .sidebar-item.active { background: rgba(14, 165, 233, 0.1); border-left-color: #0ea5e9; }
+        
+        .hero-bg { background: radial-gradient(ellipse at center, rgba(14, 165, 233, 0.15) 0%, transparent 70%); }
+        
+        .stats-card { background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(217, 70, 239, 0.05)); border: 1px solid rgba(14, 165, 233, 0.2); }
+        
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); position: fixed; z-index: 50; }
+            .sidebar.open { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="bg-dark-950 text-white font-sans min-h-screen">
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <!-- LANDING PAGE -->
+    <div id="landingPage" class="page active">
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-40 glass">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-2">
+                        <!-- LOGO SIDVIX4I - Substitua pela sua imagem -->
+                        <div class="w-10 h-10 rounded-xl overflow-hidden">
+                            <img src="./logo-sidvix4i.png" alt="Sidvix4I Logo" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-2xl font-display font-bold gradient-text">Sidvix4I</span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#features" class="text-gray-300 hover:text-white transition-colors">Features</a>
+                        <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                        <a href="#gallery" class="text-gray-300 hover:text-white transition-colors">Gallery</a>
+                        <button onclick="showAuth('login')" class="text-gray-300 hover:text-white transition-colors">Sign In</button>
+                        <button onclick="showAuth('signup')" class="btn-primary px-6 py-2 rounded-full font-semibold">Get Started Free</button>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="fixed inset-0 z-30 bg-dark-950 pt-20 px-6 hidden">
+            <div class="flex flex-col space-y-4">
+                <a href="#features" class="text-xl text-gray-300 py-3 border-b border-gray-800">Features</a>
+                <a href="#pricing" class="text-xl text-gray-300 py-3 border-b border-gray-800">Pricing</a>
+                <a href="#gallery" class="text-xl text-gray-300 py-3 border-b border-gray-800">Gallery</a>
+                <button onclick="showAuth('login')" class="text-xl text-gray-300 py-3 border-b border-gray-800">Sign In</button>
+                <button onclick="showAuth('signup')" class="btn-primary px-6 py-3 rounded-full font-semibold text-center">Get Started Free</button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden hero-bg">
+            <div class="absolute inset-0">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
+                <div class="absolute bottom-20 right-10 w-72 h-72 bg-accent-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="animate-slide-up">
+                    <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-400 text-sm font-semibold mb-6 border border-primary-500/30">
+                        🚀 100% Free AI Video Generator
+                    </span>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-6 leading-tight">
+                        Create <span class="gradient-text">Ultra Realistic</span><br>
+                        Videos with AI
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto">
+                        Transform your ideas into stunning videos in seconds. Realistic scenes, cartoons, automated voices, and professional quality - all free.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="showAuth('signup')" class="btn-primary px-8 py-4 rounded-full text-lg font-bold flex items-center justify-center space-x-2">
+                            <span>Start Creating Free</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </button>
+                        <button onclick="document.getElementById('demoVideo').scrollIntoView({behavior: 'smooth'})" class="px-8 py-4 rounded-full text-lg font-semibold border border-gray-600 hover:border-primary-500 transition-all flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>Watch Demo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="mt-16 animate-slide-up" style="animation-delay: 0.3s;">
+                    <div class="relative max-w-4xl mx-auto">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl blur opacity-30"></div>
+                        <div class="relative rounded-2xl overflow-hidden glass">
+                            <img src="https://image.qwenlm.ai/public_source/2d2ee71f-12c5-4f8f-bdd9-803e404f2291/1e6a178a4-6bb5-4964-b1c0-98c15f8df286.png" alt="Sidvix4I Interface" class="w-full rounded-2xl">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-slide-up" style="animation-delay: 0.5s;">
+                    <div class="glass-light rounded-2xl p-6">
+                        <div class="text-3xl font-bold text-primary-400">2M+</div>
+                        <div class="text-gray-400 text-sm">Videos Created</div>
+                    </div>
+                    <div class="glass-light rounded-2xl p-6">
+                        <div class="text-3xl font-bold text-accent-400">500K+</div>
+                        <div class="text-gray-400 text-sm">Active Users</div>
+                    </div>
+                    <div class="glass-light rounded-2xl p-6">
+                        <div class="text-3xl font-bold text-green-400">100%</div>
+                        <div class="text-gray-400 text-sm">Free Forever</div>
+                    </div>
+                    <div class="glass-light rounded-2xl p-6">
+                        <div class="text-3xl font-bold text-yellow-400">4K</div>
+                        <div class="text-gray-400 text-sm">Max Quality</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Powerful <span class="gradient-text">AI Features</span></h2>
+                    <p class="text-xl text-gray-400 max-w-2xl mx-auto">Everything you need to create professional videos, all powered by cutting-edge AI</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="feature-card rounded-2xl p-8 card-hover">
+                        <div class="w-14 h-14 rounded-xl bg-primary-500/20 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Ultra Realistic Videos</h3>
+                        <p class="text-gray-400">Generate photorealistic videos with AI that look indistinguishable from real footage. Perfect for marketing, content creation, and more.</p>
+                    </div>
+
+                    <div class="feature-card rounded-2xl p-8 card-hover">
+                        <div class="w-14 h-14 rounded-xl bg-accent-500/20 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Cartoon Creator</h3>
+                        <p class="text-gray-400">Create stunning animated cartoons with AI. Choose from multiple styles including 3D, anime, pixel art, and hand-drawn aesthetics.</p>
+                    </div>
+
+                    <div class="feature-card rounded-2xl p-8 card-hover">
+                        <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Automated Voices</h3>
+                        <p class="text-gray-400">Add professional AI voiceovers in 50+ languages. Choose from male, female, and character voices with natural intonation.</p>
+                    </div>
+
+                    <div class="feature-card rounded-2xl p-8 card-hover">
+                        <div class="w-14 h-14 rounded-xl bg-yellow-500/20 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Ready to Post</h3>
+                        <p class="text-gray-400">Export videos optimized for YouTube, TikTok, Instagram, and more. One-click publishing with perfect aspect ratios.</p>
+                    </div>
+
+                    <div class="feature-card rounded-2xl p-8 card-hover">
+                        <div class="w-14 h-14 rounded-xl bg-red-500/20 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">AI Auto-Edit</h3>
+                        <p class="text-gray-400">Let AI handle transitions, color grading, music sync, and effects. Professional results without any editing skills needed.</p>
+                    </div>
+
+                    <div class="feature-card rounded-2xl p-8 card-hover">
+                        <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Multiple Quality Options</h3>
+                        <p class="text-gray-400">Choose from 480p to 4K Ultra HD. Adjust frame rates, bitrates, and codecs for the perfect balance of quality and file size.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Simple <span class="gradient-text">Pricing</span></h2>
+                    <p class="text-xl text-gray-400">Start free, upgrade when you need more</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="glass rounded-2xl p-8 card-hover">
+                        <h3 class="text-xl font-bold mb-2">Free</h3>
+                        <div class="text-4xl font-bold mb-4">$0<span class="text-lg text-gray-400">/mo</span></div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">10 videos/month</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">720p quality</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">Basic voices</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">Watermark included</span></li>
+                        </ul>
+                        <button onclick="showAuth('signup')" class="w-full py-3 rounded-full border border-gray-600 hover:border-primary-500 transition-all font-semibold">Get Started</button>
+                    </div>
+
+                    <div class="relative glass rounded-2xl p-8 card-hover border-primary-500/50">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full text-sm font-bold">MOST POPULAR</div>
+                        <h3 class="text-xl font-bold mb-2">Pro</h3>
+                        <div class="text-4xl font-bold mb-4">$19<span class="text-lg text-gray-400">/mo</span></div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">Unlimited videos</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">4K Ultra HD</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">All voices & languages</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">No watermark</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">Priority rendering</span></li>
+                        </ul>
+                        <button onclick="showAuth('signup')" class="w-full py-3 rounded-full btn-primary font-semibold">Upgrade to Pro</button>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8 card-hover">
+                        <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+                        <div class="text-4xl font-bold mb-4">$49<span class="text-lg text-gray-400">/mo</span></div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">Everything in Pro</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">API access</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">Custom AI training</span></li>
+                            <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-300">Dedicated support</span></li>
+                        </ul>
+                        <button onclick="showAuth('signup')" class="w-full py-3 rounded-full border border-gray-600 hover:border-primary-500 transition-all font-semibold">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="glass rounded-3xl p-12 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-accent-500/20"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Ready to Create Amazing Videos?</h2>
+                        <p class="text-xl text-gray-400 mb-8">Join 500,000+ creators using Sidvix4I to bring their ideas to life</p>
+                        <button onclick="showAuth('signup')" class="btn-primary px-10 py-4 rounded-full text-lg font-bold">
+                            Start Creating Free Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-10 h-10 rounded-xl overflow-hidden">
+                                <img src="./logo-sidvix4i.png" alt="Sidvix4I" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-2xl font-display font-bold gradient-text">Sidvix4I</span>
+                        </div>
+                        <p class="text-gray-400">The most powerful free AI video generator in the world.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Product</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">API</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Company</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Legal</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
+                    <p>&copy; 2026 Sidvix4I (Sidivix AI). All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- AUTH PAGE -->
+    <div id="authPage" class="page">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="absolute inset-0">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+                <div class="absolute bottom-20 right-10 w-72 h-72 bg-accent-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            </div>
+            
+            <div class="relative z-10 w-full max-w-md">
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-center mb-8">
+                        <div class="flex items-center justify-center space-x-2 mb-4">
+                            <div class="w-12 h-12 rounded-xl overflow-hidden">
+                                <img src="./logo-sidvix4i.png" alt="Sidvix4I" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-3xl font-display font-bold gradient-text">Sidvix4I</span>
+                        </div>
+                        <h2 id="authTitle" class="text-2xl font-bold">Create Your Account</h2>
+                        <p id="authSubtitle" class="text-gray-400 mt-2">Start creating amazing videos for free</p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="loginForm" class="hidden space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="loginEmail" class="w-full px-4 py-3 rounded-xl input-field text-white" placeholder="your@email.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="loginPassword" class="w-full px-4 py-3 rounded-xl input-field text-white" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-xl btn-primary font-semibold">Sign In</button>
+                        <p class="text-center text-gray-400">Don't have an account? <button type="button" onclick="toggleAuthMode()" class="text-primary-400 hover:underline">Sign Up</button></p>
+                    </form>
+
+                    <!-- Signup Form -->
+                    <form id="signupForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Full Name</label>
+                            <input type="text" id="signupName" class="w-full px-4 py-3 rounded-xl input-field text-white" placeholder="John Doe" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="signupEmail" class="w-full px-4 py-3 rounded-xl input-field text-white" placeholder="your@email.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="signupPassword" class="w-full px-4 py-3 rounded-xl input-field text-white" placeholder="••••••••" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Confirm Password</label>
+                            <input type="password" id="signupConfirm" class="w-full px-4 py-3 rounded-xl input-field text-white" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-xl btn-primary font-semibold">Create Free Account</button>
+                        <p class="text-center text-gray-400">Already have an account? <button type="button" onclick="toggleAuthMode()" class="text-primary-400 hover:underline">Sign In</button></p>
+                    </form>
+
+                    <div class="mt-6 pt-6 border-t border-gray-700">
+                        <button onclick="showPage('landingPage')" class="w-full py-2 text-gray-400 hover:text-white transition-colors flex items-center justify-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                            <span>Back to Home</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD PAGE -->
+    <div id="dashboardPage" class="page">
+        <div class="flex h-screen">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="sidebar w-64 bg-dark-900 border-r border-gray-800 flex flex-col">
+                <div class="p-6">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-10 h-10 rounded-xl overflow-hidden">
+                            <img src="./logo-sidvix4i.png" alt="Sidvix4I" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xl font-display font-bold gradient-text">Sidvix4I</span>
+                    </div>
+                </div>
+
+                <nav class="flex-1 px-4 space-y-1">
+                    <button onclick="switchTab('create')" class="sidebar-item active w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        <span>Create Video</span>
+                    </button>
+                    <button onclick="switchTab('myvideos')" class="sidebar-item w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <span>My Videos</span>
+                    </button>
+                    <button onclick="switchTab('templates')" class="sidebar-item w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+                        <span>Templates</span>
+                    </button>
+                    <button onclick="switchTab('voices')" class="sidebar-item w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                        <span>Voice Library</span>
+                    </button>
+                    <button onclick="switchTab('settings')" class="sidebar-item w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>Settings</span>
+                    </button>
+                </nav>
+
+                <div class="p-4 border-t border-gray-800">
+                    <div class="glass-light rounded-xl p-4 mb-4">
+                        <div class="text-sm text-gray-400 mb-2">Free Plan</div>
+                        <div class="w-full bg-gray-700 rounded-full h-2 mb-2">
+                            <div class="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full" style="width: 30%"></div>
+                        </div>
+                        <div class="text-xs text-gray-500">3/10 videos used</div>
+                    </div>
+                    <button onclick="logout()" class="w-full flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 overflow-y-auto">
+                <!-- Top Bar -->
+                <header class="sticky top-0 z-30 glass border-b border-gray-800 px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                            </button>
+                            <h1 id="pageTitle" class="text-xl font-bold">Create Video</h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button class="relative p-2 text-gray-400 hover:text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-sm font-bold" id="userAvatar">U</div>
+                                <span class="hidden md:block text-sm font-medium" id="userName">User</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Create Tab -->
+                <div id="createTab" class="tab-content p-6">
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <!-- Left Panel - Settings -->
+                        <div class="lg:col-span-1 space-y-6">
+                            <!-- Video Type -->
+                            <div class="glass rounded-2xl p-6">
+                                <h3 class="font-bold mb-4 flex items-center space-x-2">
+                                    <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                                    <span>Video Type</span>
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button onclick="setVideoType('realistic')" id="btnRealistic" class="quality-option selected rounded-xl p-4 text-center">
+                                        <div class="text-2xl mb-2">🎬</div>
+                                        <div class="text-sm font-semibold">Realistic</div>
+                                    </button>
+                                    <button onclick="setVideoType('cartoon')" id="btnCartoon" class="quality-option rounded-xl p-4 text-center">
+                                        <div class="text-2xl mb-2">🎨</div>
+                                        <div class="text-sm font-semibold">Cartoon</div>
+                                    </button>
+                                    <button onclick="setVideoType('anime')" id="btnAnime" class="quality-option rounded-xl p-4 text-center">
+                                        <div class="text-2xl mb-2">🌸</div>
+                                        <div class="text-sm font-semibold">Anime</div>
+                                    </button>
+                                    <button onclick="setVideoType('3d')" id="btn3d" class="quality-option rounded-xl p-4 text-center">
+                                        <div class="text-2xl mb-2">🎮</div>
+                                        <div class="text-sm font-semibold">3D Render</div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Quality Settings -->
+                            <div class="glass rounded-2xl p-6">
+                                <h3 class="font-bold mb-4 flex items-center space-x-2">
+                                    <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                                    <span>Quality</span>
+                                </h3>
+                                <div class="space-y-3">
+                                    <label class="quality-option selected rounded-xl p-3 flex items-center justify-between" onclick="setQuality(this, '4k')">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="text-lg">📺</span>
+                                            <div>
+                                                <div class="font-semibold">4K Ultra HD</div>
+                                                <div class="text-xs text-gray-400">3840 x 2160</div>
+                                            </div>
+                                        </div>
+                                        <div class="w-4 h-4 rounded-full border-2 border-primary-500 flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-primary-500"></div></div>
+                                    </label>
+                                    <label class="quality-option rounded-xl p-3 flex items-center justify-between" onclick="setQuality(this, '1080p')">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="text-lg">🖥️</span>
+                                            <div>
+                                                <div class="font-semibold">1080p Full HD</div>
+                                                <div class="text-xs text-gray-400">1920 x 1080</div>
+                                            </div>
+                                        </div>
+                                        <div class="w-4 h-4 rounded-full border-2 border-gray-600"></div>
+                                    </label>
+                                    <label class="quality-option rounded-xl p-3 flex items-center justify-between" onclick="setQuality(this, '720p')">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="text-lg">💻</span>
+                                            <div>
+                                                <div class="font-semibold">720p HD</div>
+                                                <div class="text-xs text-gray-400">1280 x 720</div>
+                                            </div>
+                                        </div>
+                                        <div class="w-4 h-4 rounded-full border-2 border-gray-600"></div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Voice Settings -->
+                            <div class="glass rounded-2xl p-6">
+                                <h3 class="font-bold mb-4 flex items-center space-x-2">
+                                    <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                                    <span>Voice Over</span>
+                                </h3>
+                                <div class="space-y-3">
+                                    <select id="voiceSelect" class="w-full px-4 py-3 rounded-xl input-field text-white">
+                                        <option value="">No Voice Over</option>
+                                        <option value="male-1">👨 James - Male (US)</option>
+                                        <option value="male-2">👨 Michael - Male (UK)</option>
+                                        <option value="female-1">👩 Sarah - Female (US)</option>
+                                        <option value="female-2">👩 Emma - Female (UK)</option>
+                                        <option value="cartoon-1">🤖 Robo - Cartoon</option>
+                                        <option value="cartoon-2">🧙 Wizard - Fantasy</option>
+                                        <option value="narrator">🎙️ Narrator - Documentary</option>
+                                    </select>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm text-gray-400">Auto-generate voice</span>
+                                        <div id="autoVoiceToggle" class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Features -->
+                            <div class="glass rounded-2xl p-6">
+                                <h3 class="font-bold mb-4 flex items-center space-x-2">
+                                    <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    <span>AI Auto Features</span>
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm">Auto Transitions</span>
+                                        <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm">Auto Color Grade</span>
+                                        <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm">Auto Music Sync</span>
+                                        <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm">Auto Subtitles</span>
+                                        <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm">Remove Background</span>
+                                        <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel - Preview & Generate -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <!-- Prompt Input -->
+                            <div class="glass rounded-2xl p-6">
+                                <h3 class="font-bold mb-4">Describe Your Video</h3>
+                                <textarea id="videoPrompt" class="w-full px-4 py-4 rounded-xl input-field text-white h-32 resize-none" placeholder="Describe the video you want to create...&#10;&#10;Example: A majestic eagle soaring over snow-capped mountains at sunset, cinematic lighting, slow motion, 4K quality"></textarea>
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="flex items-center space-x-4">
+                                        <button onclick="enhancePrompt()" class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-primary-500/20 text-primary-400 hover:bg-primary-500/30 transition-all">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                            <span class="text-sm">AI Enhance</span>
+                                        </button>
+                                        <button onclick="randomPrompt()" class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-accent-500/20 text-accent-400 hover:bg-accent-500/30 transition-all">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                            <span class="text-sm">Random</span>
+                                        </button>
+                                    </div>
+                                    <span class="text-sm text-gray-500" id="charCount">0/500</span>
+                                </div>
+                            </div>
+
+                            <!-- Duration & Aspect Ratio -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="glass rounded-2xl p-6">
+                                    <label class="block text-sm font-medium mb-3">Duration</label>
+                                    <input type="range" id="durationSlider" min="5" max="120" value="30" class="w-full accent-primary-500" oninput="updateDuration(this.value)">
+                                    <div class="flex justify-between text-sm text-gray-400 mt-2">
+                                        <span>5s</span>
+                                        <span id="durationValue" class="text-primary-400 font-semibold">30s</span>
+                                        <span>120s</span>
+                                    </div>
+                                </div>
+                                <div class="glass rounded-2xl p-6">
+                                    <label class="block text-sm font-medium mb-3">Aspect Ratio</label>
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <button onclick="setAspectRatio(this, '16:9')" class="aspect-btn selected px-3 py-2 rounded-lg bg-primary-500/20 text-primary-400 text-sm font-medium border border-primary-500/50">16:9</button>
+                                        <button onclick="setAspectRatio(this, '9:16')" class="aspect-btn px-3 py-2 rounded-lg bg-gray-800 text-gray-400 text-sm font-medium border border-gray-700">9:16</button>
+                                        <button onclick="setAspectRatio(this, '1:1')" class="aspect-btn px-3 py-2 rounded-lg bg-gray-800 text-gray-400 text-sm font-medium border border-gray-700">1:1</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview -->
+                            <div class="glass rounded-2xl p-6">
+                                <h3 class="font-bold mb-4">Preview</h3>
+                                <div class="video-preview rounded-xl aspect-video flex items-center justify-center relative">
+                                    <div id="previewPlaceholder" class="text-center">
+                                        <svg class="w-16 h-16 text-gray-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                        </svg>
+                                        <p class="text-gray-500">Your video preview will appear here</p>
+                                    </div>
+                                    <img id="previewImage" class="hidden w-full h-full object-cover rounded-xl" src="" alt="Preview">
+                                    <div id="generatingOverlay" class="hidden absolute inset-0 bg-dark-950/80 rounded-xl flex items-center justify-center">
+                                        <div class="text-center">
+                                            <div class="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin-slow mx-auto mb-4"></div>
+                                            <p class="text-lg font-semibold mb-2">Generating Video...</p>
+                                            <p class="text-sm text-gray-400" id="generationStatus">Initializing AI models</p>
+                                            <div class="w-64 bg-gray-700 rounded-full h-2 mt-4">
+                                                <div id="progressBar" class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+                                            </div>
+                                            <p class="text-sm text-gray-400 mt-2" id="progressPercent">0%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Generate Button -->
+                            <button onclick="generateVideo()" id="generateBtn" class="w-full py-4 rounded-xl btn-primary text-lg font-bold flex items-center justify-center space-x-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <span>Generate Video</span>
+                            </button>
+
+                            <!-- Export Options (Hidden until video is generated) -->
+                            <div id="exportOptions" class="hidden glass rounded-2xl p-6">
+                                <h3 class="font-bold mb-4">Export Options</h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <button onclick="exportVideo('mp4')" class="px-4 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 transition-all text-center">
+                                        <div class="text-lg mb-1">📹</div>
+                                        <div class="text-sm font-semibold">MP4</div>
+                                    </button>
+                                    <button onclick="exportVideo('mov')" class="px-4 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 transition-all text-center">
+                                        <div class="text-lg mb-1">🎬</div>
+                                        <div class="text-sm font-semibold">MOV</div>
+                                    </button>
+                                    <button onclick="exportVideo('gif')" class="px-4 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 transition-all text-center">
+                                        <div class="text-lg mb-1">🎞️</div>
+                                        <div class="text-sm font-semibold">GIF</div>
+                                    </button>
+                                    <button onclick="exportVideo('webm')" class="px-4 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 transition-all text-center">
+                                        <div class="text-lg mb-1">🌐</div>
+                                        <div class="text-sm font-semibold">WebM</div>
+                                    </button>
+                                </div>
+                                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    <button onclick="shareTo('youtube')" class="px-4 py-3 rounded-xl bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-all flex items-center justify-center space-x-2">
+                                        <span>YouTube</span>
+                                    </button>
+                                    <button onclick="shareTo('tiktok')" class="px-4 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 transition-all flex items-center justify-center space-x-2">
+                                        <span>TikTok</span>
+                                    </button>
+                                    <button onclick="shareTo('instagram')" class="px-4 py-3 rounded-xl bg-pink-500/20 text-pink-400 hover:bg-pink-500/30 transition-all flex items-center justify-center space-x-2">
+                                        <span>Instagram</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Videos Tab -->
+                <div id="myvideosTab" class="tab-content hidden p-6">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="myVideosGrid">
+                        <!-- Videos will be added here dynamically -->
+                        <div class="glass rounded-2xl overflow-hidden card-hover">
+                            <div class="aspect-video bg-gradient-to-br from-primary-900 to-accent-900 flex items-center justify-center relative">
+                                <img src="https://image.qwenlm.ai/public_source/2d2ee71f-12c5-4f8f-bdd9-803e404f2291/1e6a178a4-6bb5-4964-b1c0-98c15f8df286.png" class="w-full h-full object-cover" alt="Video">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                    <button class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                </div>
+                                <span class="absolute bottom-2 right-2 px-2 py-1 bg-black/60 rounded text-xs">0:30</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Mountain Eagle Cinematic</h4>
+                                <div class="flex items-center justify-between text-sm text-gray-400">
+                                    <span>4K • Realistic</span>
+                                    <span>2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl overflow-hidden card-hover">
+                            <div class="aspect-video bg-gradient-to-br from-accent-900 to-primary-900 flex items-center justify-center relative">
+                                <img src="https://image.qwenlm.ai/public_source/2d2ee71f-12c5-4f8f-bdd9-803e404f2291/1da3aea29-8999-49de-a308-bee8599cf194.png" class="w-full h-full object-cover" alt="Video">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                    <button class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                </div>
+                                <span class="absolute bottom-2 right-2 px-2 py-1 bg-black/60 rounded text-xs">0:45</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Fantasy Forest Cartoon</h4>
+                                <div class="flex items-center justify-between text-sm text-gray-400">
+                                    <span>1080p • Cartoon</span>
+                                    <span>5 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates Tab -->
+                <div id="templatesTab" class="tab-content hidden p-6">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass rounded-2xl overflow-hidden card-hover cursor-pointer" onclick="useTemplate('cinematic')">
+                            <div class="aspect-video bg-gradient-to-br from-blue-900 to-purple-900 flex items-center justify-center">
+                                <span class="text-4xl">🎬</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Cinematic Trailer</h4>
+                                <p class="text-sm text-gray-400">Epic movie-style trailer with dramatic music</p>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl overflow-hidden card-hover cursor-pointer" onclick="useTemplate('tutorial')">
+                            <div class="aspect-video bg-gradient-to-br from-green-900 to-teal-900 flex items-center justify-center">
+                                <span class="text-4xl">📚</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Tutorial Video</h4>
+                                <p class="text-sm text-gray-400">Clean educational content with voiceover</p>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl overflow-hidden card-hover cursor-pointer" onclick="useTemplate('social')">
+                            <div class="aspect-video bg-gradient-to-br from-pink-900 to-red-900 flex items-center justify-center">
+                                <span class="text-4xl">📱</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Social Media Ad</h4>
+                                <p class="text-sm text-gray-400">Eye-catching vertical video for ads</p>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl overflow-hidden card-hover cursor-pointer" onclick="useTemplate('cartoon')">
+                            <div class="aspect-video bg-gradient-to-br from-yellow-900 to-orange-900 flex items-center justify-center">
+                                <span class="text-4xl">🎨</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Cartoon Short</h4>
+                                <p class="text-sm text-gray-400">Fun animated cartoon with characters</p>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl overflow-hidden card-hover cursor-pointer" onclick="useTemplate('music')">
+                            <div class="aspect-video bg-gradient-to-br from-purple-900 to-pink-900 flex items-center justify-center">
+                                <span class="text-4xl">🎵</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Music Video</h4>
+                                <p class="text-sm text-gray-400">Visualizer with beat-synced effects</p>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl overflow-hidden card-hover cursor-pointer" onclick="useTemplate('product')">
+                            <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                                <span class="text-4xl">📦</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-1">Product Showcase</h4>
+                                <p class="text-sm text-gray-400">Professional product presentation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voices Tab -->
+                <div id="voicesTab" class="tab-content hidden p-6">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="voice-card rounded-xl p-4" onclick="selectVoice(this)">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">👨</div>
+                                <div>
+                                    <div class="font-semibold">James</div>
+                                    <div class="text-xs text-gray-400">Male • US English</div>
+                                </div>
+                            </div>
+                            <button class="w-full py-2 rounded-lg bg-primary-500/20 text-primary-400 text-sm hover:bg-primary-500/30 transition-all">Preview</button>
+                        </div>
+                        <div class="voice-card rounded-xl p-4" onclick="selectVoice(this)">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center">👩</div>
+                                <div>
+                                    <div class="font-semibold">Sarah</div>
+                                    <div class="text-xs text-gray-400">Female • US English</div>
+                                </div>
+                            </div>
+                            <button class="w-full py-2 rounded-lg bg-primary-500/20 text-primary-400 text-sm hover:bg-primary-500/30 transition-all">Preview</button>
+                        </div>
+                        <div class="voice-card rounded-xl p-4" onclick="selectVoice(this)">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">👨</div>
+                                <div>
+                                    <div class="font-semibold">Michael</div>
+                                    <div class="text-xs text-gray-400">Male • UK English</div>
+                                </div>
+                            </div>
+                            <button class="w-full py-2 rounded-lg bg-primary-500/20 text-primary-400 text-sm hover:bg-primary-500/30 transition-all">Preview</button>
+                        </div>
+                        <div class="voice-card rounded-xl p-4" onclick="selectVoice(this)">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">👩</div>
+                                <div>
+                                    <div class="font-semibold">Emma</div>
+                                    <div class="text-xs text-gray-400">Female • UK English</div>
+                                </div>
+                            </div>
+                            <button class="w-full py-2 rounded-lg bg-primary-500/20 text-primary-400 text-sm hover:bg-primary-500/30 transition-all">Preview</button>
+                        </div>
+                        <div class="voice-card rounded-xl p-4" onclick="selectVoice(this)">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">🤖</div>
+                                <div>
+                                    <div class="font-semibold">Robo</div>
+                                    <div class="text-xs text-gray-400">Cartoon • Robotic</div>
+                                </div>
+                            </div>
+                            <button class="w-full py-2 rounded-lg bg-primary-500/20 text-primary-400 text-sm hover:bg-primary-500/30 transition-all">Preview</button>
+                        </div>
+                        <div class="voice-card rounded-xl p-4" onclick="selectVoice(this)">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">🧙</div>
+                                <div>
+                                    <div class="font-semibold">Wizard</div>
+                                    <div class="text-xs text-gray-400">Fantasy • Mystical</div>
+                                </div>
+                            </div>
+                            <button class="w-full py-2 rounded-lg bg-primary-500/20 text-primary-400 text-sm hover:bg-primary-500/30 transition-all">Preview</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settingsTab" class="tab-content hidden p-6">
+                    <div class="max-w-2xl space-y-6">
+                        <div class="glass rounded-2xl p-6">
+                            <h3 class="font-bold mb-4">Account Settings</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Display Name</label>
+                                    <input type="text" id="settingsName" class="w-full px-4 py-3 rounded-xl input-field text-white" value="User">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Email</label>
+                                    <input type="email" id="settingsEmail" class="w-full px-4 py-3 rounded-xl input-field text-white" value="user@example.com">
+                                </div>
+                                <button onclick="saveSettings()" class="px-6 py-2 rounded-xl btn-primary font-semibold">Save Changes</button>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl p-6">
+                            <h3 class="font-bold mb-4">Default Settings</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span>Default Quality</span>
+                                    <select class="px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700">
+                                        <option>4K Ultra HD</option>
+                                        <option>1080p Full HD</option>
+                                        <option>720p HD</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Default Format</span>
+                                    <select class="px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700">
+                                        <option>MP4</option>
+                                        <option>MOV</option>
+                                        <option>WebM</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Auto-save projects</span>
+                                    <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass rounded-2xl p-6">
+                            <h3 class="font-bold mb-4 text-red-400">Danger Zone</h3>
+                            <button onclick="if(confirm('Are you sure?')) logout()" class="px-6 py-2 rounded-xl bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-all font-semibold">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentUser = null;
+        let currentVideoType = 'realistic';
+        let currentQuality = '4k';
+        let currentAspectRatio = '16:9';
+        let generatedVideos = [];
+        let isGenerating = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('sidvix_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showPage('dashboardPage');
+                updateUserUI();
+            }
+
+            // Character counter
+            document.getElementById('videoPrompt').addEventListener('input', function() {
+                document.getElementById('charCount').textContent = this.value.length + '/500';
+            });
+
+            // Form handlers
+            document.getElementById('signupForm').addEventListener('submit', handleSignup);
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        });
+
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showAuth(mode) {
+            showPage('authPage');
+            if (mode === 'login') {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('signupForm').classList.add('hidden');
+                document.getElementById('authTitle').textContent = 'Welcome Back';
+                document.getElementById('authSubtitle').textContent = 'Sign in to continue creating';
+            } else {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('signupForm').classList.remove('hidden');
+                document.getElementById('authTitle').textContent = 'Create Your Account';
+                document.getElementById('authSubtitle').textContent = 'Start creating amazing videos for free';
+            }
+        }
+
+        function toggleAuthMode() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm.classList.contains('hidden')) {
+                showAuth('login');
+            } else {
+                showAuth('signup');
+            }
+        }
+
+        // Auth Handlers
+        function handleSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+
+            if (password !== confirm) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters', 'error');
+                return;
+            }
+
+            // Simulate signup
+            currentUser = { name, email, id: Date.now(), plan: 'free', videosCreated: 0 };
+            localStorage.setItem('sidvix_user', JSON.stringify(currentUser));
+            
+            updateUserUI();
+            showPage('dashboardPage');
+            showNotification('Welcome to Sidvix4I, ' + name + '!', 'success');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Simulate login
+            currentUser = { name: email.split('@')[0], email, id: Date.now(), plan: 'free', videosCreated: 3 };
+            localStorage.setItem('sidvix_user', JSON.stringify(currentUser));
+            
+            updateUserUI();
+            showPage('dashboardPage');
+            showNotification('Welcome back!', 'success');
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('sidvix_user');
+            showPage('landingPage');
+            showNotification('Logged out successfully', 'info');
+        }
+
+        function updateUserUI() {
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+                document.getElementById('settingsName').value = currentUser.name;
+                document.getElementById('settingsEmail').value = currentUser.email;
+            }
+        }
+
+        // Dashboard Tabs
+        function switchTab(tab, event) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.getElementById(tab + 'Tab').classList.remove('hidden');
+            
+            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+            if (event) {
+                event.currentTarget.classList.add('active');
+            }
+            
+            const titles = { create: 'Create Video', myvideos: 'My Videos', templates: 'Templates', voices: 'Voice Library', settings: 'Settings' };
+            document.getElementById('pageTitle').textContent = titles[tab] || 'Create Video';
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // Video Settings
+        function setVideoType(type) {
+            currentVideoType = type;
+            document.querySelectorAll('#btnRealistic, #btnCartoon, #btnAnime, #btn3d').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.getElementById('btn' + type.charAt(0).toUpperCase() + type.slice(1)).classList.add('selected');
+        }
+
+        function setQuality(el, quality) {
+            currentQuality = quality;
+            document.querySelectorAll('.quality-option').forEach(q => {
+                q.classList.remove('selected');
+                q.querySelector('.rounded-full').classList.remove('border-primary-500');
+                q.querySelector('.rounded-full').classList.add('border-gray-600');
+                const inner = q.querySelector('.rounded-full > div');
+                if (inner) inner.remove();
+            });
+            el.classList.add('selected');
+            const outer = el.querySelector('.rounded-full');
+            outer.classList.remove('border-gray-600');
+            outer.classList.add('border-primary-500');
+            const inner = document.createElement('div');
+            inner.className = 'w-2 h-2 rounded-full bg-primary-500';
+            outer.appendChild(inner);
+        }
+
+        function setAspectRatio(el, ratio) {
+            currentAspectRatio = ratio;
+            document.querySelectorAll('.aspect-btn').forEach(b => {
+                b.classList.remove('selected', 'bg-primary-500/20', 'text-primary-400', 'border-primary-500/50');
+                b.classList.add('bg-gray-800', 'text-gray-400', 'border-gray-700');
+            });
+            el.classList.add('selected', 'bg-primary-500/20', 'text-primary-400', 'border-primary-500/50');
+            el.classList.remove('bg-gray-800', 'text-gray-400', 'border-gray-700');
+        }
+
+        function updateDuration(val) {
+            document.getElementById('durationValue').textContent = val + 's';
+        }
+
+        function toggleSwitch(el) {
+            el.classList.toggle('active');
+        }
+
+        // Prompt Functions
+        const samplePrompts = [
+            "A majestic eagle soaring over snow-capped mountains at sunset, cinematic lighting, slow motion, 4K quality",
+            "Futuristic city at night with flying cars and neon lights, cyberpunk aesthetic, rain reflections",
+            "Underwater coral reef teeming with colorful tropical fish, crystal clear water, sunlight rays",
+            "A cozy cabin in the woods during a snowstorm, warm firelight glowing through windows",
+            "Astronaut floating in space with Earth in the background, stars everywhere, realistic",
+            "Dragon flying over medieval castle, epic fantasy scene, dramatic clouds, cinematic"
+        ];
+
+        function randomPrompt() {
+            const prompt = samplePrompts[Math.floor(Math.random() * samplePrompts.length)];
+            document.getElementById('videoPrompt').value = prompt;
+            document.getElementById('charCount').textContent = prompt.length + '/500';
+        }
+
+        function enhancePrompt() {
+            const current = document.getElementById('videoPrompt').value;
+            if (!current) {
+                showNotification('Please enter a prompt first', 'error');
+                return;
+            }
+            const enhancements = ', cinematic lighting, ultra detailed, 8K resolution, professional color grading';
+            document.getElementById('videoPrompt').value = current + enhancements;
+            document.getElementById('charCount').textContent = (current + enhancements).length + '/500';
+            showNotification('✨ Prompt enhanced with AI', 'success');
+        }
+
+        // Generate Video
+        function generateVideo() {
+            const prompt = document.getElementById('videoPrompt').value;
+            if (!prompt) {
+                showNotification('Please describe your video first', 'error');
+                return;
+            }
+            if (isGenerating) return;
+
+            isGenerating = true;
+            const btn = document.getElementById('generateBtn');
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            const overlay = document.getElementById('generatingOverlay');
+            overlay.classList.remove('hidden');
+
+            const statuses = [
+                'Initializing AI models...',
+                'Analyzing prompt...',
+                'Generating scenes...',
+                'Rendering frames...',
+                'Adding voice over...',
+                'Applying effects...',
+                'Color grading...',
+                'Finalizing video...'
+            ];
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+
+                document.getElementById('progressBar').style.width = progress + '%';
+                document.getElementById('progressPercent').textContent = Math.floor(progress) + '%';
+                
+                const statusIndex = Math.min(Math.floor(progress / 12.5), statuses.length - 1);
+                document.getElementById('generationStatus').textContent = statuses[statusIndex];
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-50');
+                        isGenerating = false;
+
+                        // Show preview
+                        const previewImage = document.getElementById('previewImage');
+                        const placeholder = document.getElementById('previewPlaceholder');
+                        placeholder.classList.add('hidden');
+                        previewImage.classList.remove('hidden');
+                        
+                        // Set appropriate preview image based on type
+                        if (currentVideoType === 'cartoon') {
+                            previewImage.src = 'https://image.qwenlm.ai/public_source/2d2ee71f-12c5-4f8f-bdd9-803e404f2291/1da3aea29-8999-49de-a308-bee8599cf194.png';
+                        } else {
+                            previewImage.src = 'https://image.qwenlm.ai/public_source/2d2ee71f-12c5-4f8f-bdd9-803e404f2291/1e6a178a4-6bb5-4964-b1c0-98c15f8df286.png';
+                        }
+
+                        // Show export options
+                        document.getElementById('exportOptions').classList.remove('hidden');
+
+                        // Add to my videos
+                        const video = {
+                            id: Date.now(),
+                            prompt: prompt,
+                            type: currentVideoType,
+                            quality: currentQuality,
+                            duration: document.getElementById('durationSlider').value,
+                            timestamp: new Date().toLocaleString()
+                        };
+                        generatedVideos.push(video);
+                        
+                        if (currentUser) {
+                            currentUser.videosCreated = (currentUser.videosCreated || 0) + 1;
+                            localStorage.setItem('sidvix_user', JSON.stringify(currentUser));
+                        }
+
+                        showNotification('🎉 Video generated successfully!', 'success');
+                    }, 500);
+                }
+            }, 300);
+        }
+
+        // Export Functions
+        function exportVideo(format) {
+            showNotification(`📥 Exporting video as ${format.toUpperCase()}...`, 'info');
+            setTimeout(() => {
+                showNotification(`✅ ${format.toUpperCase()} file ready for download!`, 'success');
+            }, 2000);
+        }
+
+        function shareTo(platform) {
+            showNotification(`📤 Preparing video for ${platform}...`, 'info');
+            setTimeout(() => {
+                showNotification(`✅ Ready to post on ${platform}!`, 'success');
+            }, 1500);
+        }
+
+        // Template Functions
+        function useTemplate(template) {
+            const templates = {
+                cinematic: 'Create an epic cinematic trailer with dramatic music, slow motion shots, and professional color grading',
+                tutorial: 'Create a clean tutorial video with screen recording, voiceover explanation, and helpful annotations',
+                social: 'Create an eye-catching vertical social media ad with bold text, vibrant colors, and engaging visuals',
+                cartoon: 'Create a fun cartoon short with colorful characters, playful animation, and cheerful music',
+                music: 'Create a music video with beat-synced visual effects, dynamic transitions, and vibrant colors',
+                product: 'Create a professional product showcase with clean lighting, smooth camera movements, and elegant presentation'
+            };
+            document.getElementById('videoPrompt').value = templates[template] || '';
+            document.getElementById('charCount').textContent = (templates[template] || '').length + '/500';
+            switchTab('create', {currentTarget: document.querySelector('.sidebar-item')});
+            showNotification('Template applied! Customize and generate.', 'success');
+        }
+
+        // Voice Functions
+        function selectVoice(el) {
+            document.querySelectorAll('.voice-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            showNotification('Voice selected!', 'success');
+        }
+
+        // Settings
+        function saveSettings() {
+            if (currentUser) {
+                currentUser.name = document.getElementById('settingsName').value;
+                currentUser.email = document.getElementById('settingsEmail').value;
+                localStorage.setItem('sidvix_user', JSON.stringify(currentUser));
+                updateUserUI();
+            }
+            showNotification('Settings saved!', 'success');
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            
+            const colors = {
+                success: 'bg-green-500/20 border-green-500/50 text-green-400',
+                error: 'bg-red-500/20 border-red-500/50 text-red-400',
+                info: 'bg-primary-500/20 border-primary-500/50 text-primary-400'
+            };
+
+            notification.className = `notification px-6 py-4 rounded-xl border ${colors[type]} glass animate-slide-up`;
+            notification.innerHTML = `<p class="font-medium">${message}</p>`;
+            
+            container.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                notification.style.transition = 'all 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+                  </html>
