@@ -98,6 +98,28 @@
         .hero-bg { background: radial-gradient(ellipse at center, rgba(14, 165, 233, 0.15) 0%, transparent 70%); }
         
         @media (max-width: 768px) {
+    .sidebar { 
+        transform: translateX(-100%); 
+        position: fixed; 
+        z-index: 50; 
+        width: 280px;
+        height: 100vh;
+        transition: transform 0.3s ease;
+    }
+    .sidebar.open { 
+        transform: translateX(0); 
+    }
+    .sidebar-overlay { 
+        display: none; 
+        position: fixed; 
+        inset: 0; 
+        background: rgba(0,0,0,0.6); 
+        z-index: 40;
+    }
+    .sidebar-overlay.active { 
+        display: block; 
+    }
+        }
             .sidebar { transform: translateX(-100%); position: fixed; z-index: 50; width: 280px; }
             .sidebar.open { transform: translateX(0); }
             .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; }
@@ -106,6 +128,8 @@
     </style>
 </head>
 <body class="bg-dark-950 text-white font-sans min-h-screen">
+    <!-- Mobile Sidebar Overlay -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
     <!-- Notification Container -->
     <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
 
